@@ -1,0 +1,4 @@
+gitara
+program
+koala
+komputer
