@@ -87,6 +87,11 @@ void displayHighScores(const vector<HighScore>& scores)
     }
 }
 
+int calculateScore(int PointsAttempts) 
+{
+    const int pointsPerAttempt = 5; // Każda próba jest warta 5 punktów
+    return PointsAttempts * pointsPerAttempt;
+}
 
 //logika gry 
 void playGame(const vector<string>& words, vector<HighScore>& scores)
@@ -135,6 +140,15 @@ void playGame(const vector<string>& words, vector<HighScore>& scores)
     if (guesseWord == word)
     {
         cout << "Gratulacje! Twoje slowo to: " << word<< endl;
+        int score = calculateScore(attempts);// Oblicz punkty
+        cout << "Twoj wynik: " << score << " punktow!" << endl;
+
+        // Dodaj wynik do tablicy wyników
+        HighScore newScore;
+        cout << "Podaj swoje imie: ";
+        cin >> newScore.name;
+        newScore.score = score;
+        scores.push_back(newScore);
     }
     else
     {
