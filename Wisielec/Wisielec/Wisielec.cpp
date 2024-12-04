@@ -93,7 +93,10 @@ void playGame(const vector<string>& words, vector<HighScore>& scores)
     //Wybieranie losowego slowa
     srand(static_cast<unsigned>(time(0)));
     string word = words[rand() % words.size()];
-    string guesseWord(word.length(), '_');    
+    string guesseWord(word.length(), '_');          //slowo z niewidocznymi literami
+    string usedLetters;                             // uzyte litery
+
+    cout << "Zgadnij slowo:  " << guesseWord << endl;         //pokaz aktualny stan slowa
 
 }
 
