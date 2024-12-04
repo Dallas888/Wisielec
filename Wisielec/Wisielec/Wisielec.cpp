@@ -94,7 +94,6 @@ void playGame(const vector<string>& words, vector<HighScore>& scores)
     int attempts = 5;   //liczba zyc
 
     //Wybieranie losowego slowa
-    srand(static_cast<unsigned>(time(0)));
     string word = words[rand() % words.size()];
     string guesseWord(word.length(), '_');          //slowo z niewidocznymi literami
     string usedLetters;                             // uzyte litery
@@ -111,7 +110,7 @@ void playGame(const vector<string>& words, vector<HighScore>& scores)
         if (usedLetters.find(guess) != -1)
         {
             cout << "Ta litera zostala juz uzyta." << endl;
-            //continue;
+            continue;
         }
 
         usedLetters += guess;
@@ -127,11 +126,21 @@ void playGame(const vector<string>& words, vector<HighScore>& scores)
 
             }
         }
+        else
+        {
+            --attempts; //zmniejsz liczbe prob
+            cout << "Zly wybor !" << endl;
+        }
+    }
+    if (guesseWord == word)
+    {
+        cout << "Gratulacje! Twoje slowo to: " << word<< endl;
+    }
+    else
+    {
+        cout << "Przegrales! Twoje slowo to: " << word << endl;
     }
 }
-
-
-
 
 
 //Funkcja main
@@ -139,6 +148,8 @@ int main()
 {
     vector<string>words;
     vector<HighScore>highScores;
+
+    srand(static_cast<unsigned>(time(0))); //inicjalizator losowosci slow
 
     loadWords("words.txt", words);
     loadHighScores("scores.txt", highScores);
