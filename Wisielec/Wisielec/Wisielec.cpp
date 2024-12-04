@@ -106,7 +106,7 @@ void playGame(const vector<string>& words, vector<HighScore>& scores)
 
     while (attempts > 0 && guesseWord != word)
     {
-        cout << "Zgadnij slowo:  " << guesseWord << endl;         //pokaz aktualny stan slowa
+        cout << "Zgadnij slowo:  " << guesseWord << endl; //pokaz aktualny stan slowa
         cout << "Zdrowie: " << attempts << endl;
 
         char guess;
@@ -120,13 +120,13 @@ void playGame(const vector<string>& words, vector<HighScore>& scores)
 
         usedLetters += guess;
 
-        if (word.find(guess) != -1)                     //jesli litera jest w slowie 
+        if (word.find(guess) != -1)  //jesli litera jest w slowie 
         {
             for (size_t i = 0; i < word.length(); ++i)
             {
                 if (word[i] == guess)
                 {
-                    guesseWord[i] = guess;              //ujawnia litere 
+                    guesseWord[i] = guess; //ujawnia litere 
                 }
 
             }
@@ -144,16 +144,22 @@ void playGame(const vector<string>& words, vector<HighScore>& scores)
         cout << "Twoj wynik: " << score << " punktow!" << endl;
 
         // Dodaj wynik do tablicy wyników
-        HighScore newScore;
-        cout << "Podaj swoje imie: ";
-        cin >> newScore.name;
-        newScore.score = score;
-        scores.push_back(newScore);
+
+        cout << "Wpisz swoje imie:" << endl;
+        string name;
+        cin >> name;
+
+        scores.push_back({ name, score });
+        sort(scores.begin(), scores.end(), [](const HighScore& a, const HighScore& b)
+            {
+                return b.score < a.score; //sortuje wynik malejaco
+            });
     }
     else
     {
         cout << "Przegrales! Twoje slowo to: " << word << endl;
     }
+
 }
 
 
@@ -167,29 +173,34 @@ int main()
 
     loadWords("words.txt", words);
     loadHighScores("scores.txt", highScores);
-    playGame(words, highScores);
+    //playGame(words, highScores);
 
     char choice;
 
     do
     {
         cout << "1. Play" << endl;
-        cout << "2. Exit" << endl;
+        cout << "2. View Scores" << endl;
+        cout << "3. Exit" << endl;
         cin >> choice;
 
         switch (choice)
         {
         case '1':
             playGame(words, highScores);
+            saveHighScores("scores.txt", highScores); //zapisuje wynik
             break;
         case '2':
+            displayHighScores(highScores);
+            break;
+        case '3':
             cout << "Bye bye !" << endl;
             break;
         default:
             cout << "Try again!" << endl;
         }
     } 
-    while (choice != '2');
+    while (choice != '3');
 
 
     return 0;
