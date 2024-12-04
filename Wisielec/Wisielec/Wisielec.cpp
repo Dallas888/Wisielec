@@ -87,19 +87,12 @@ void loadHighScores(const string& filename, vector<HighScore>& scores)
 int main()
 {
     vector<string>words;
+    vector<HighScore>highScores;
+
     loadWords("words.txt", words);
-    if (words.empty())
-    {
-        cout << "pusty" << endl;
-    }
-    else
-    {
-        for (const auto& word : words)
-        {
-            cout << word << endl;
-        }
-    }
+    loadHighScores("scores.txt", highScores);
     
+
     return 0;
 
 }
