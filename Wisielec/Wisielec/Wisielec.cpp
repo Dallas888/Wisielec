@@ -4,6 +4,7 @@
 #include<string>
 #include<algorithm>
 #include <filesystem>
+#include<cstdlib>
 
 using namespace std;
 
@@ -98,6 +99,28 @@ void playGame(const vector<string>& words, vector<HighScore>& scores)
 
     cout << "Zgadnij slowo:  " << guesseWord << endl;         //pokaz aktualny stan slowa
 
+    char guess;
+    cin >> guess;
+
+    if (usedLetters.find(guess) != -1)
+    {
+        cout << "Ta litera zostala juz uzyta." << endl;
+        //continue;
+    }
+
+    usedLetters += guess;
+
+    if (word.find(guess) != -1)                     //jesli litera jest w slowie 
+    {
+        for (size_t i = 0; i < word.length(); ++i)
+        {
+            if (word[i] == guess)
+            {
+                guesseWord[i] = guess;              //ujawnia litere 
+           }
+
+        }
+    }
 }
 
 
