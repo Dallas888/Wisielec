@@ -76,8 +76,26 @@ void loadHighScores(const string& filename, vector<HighScore>& scores)
     file.close();
 }
 
-//logika gry 
+void displayHighScores(const vector<HighScore>& scores)
+{
+    cout << "Wynik: " << endl;
 
+    for (const auto& score : scores)
+    {
+        cout << score.name << "-" << score.score << endl;
+    }
+}
+
+
+//logika gry 
+void playGame(const vector<string>& words, vector<HighScore>& scores)
+{
+    //Wybieranie losowego slowa
+    srand(static_cast<unsigned>(time(0)));
+    string word = words[rand() % words.size()];
+    string guesseWord(word.length(), '_');    
+
+}
 
 
 
@@ -91,7 +109,7 @@ int main()
 
     loadWords("words.txt", words);
     loadHighScores("scores.txt", highScores);
-    
+    playGame(words, highScores);
 
     return 0;
 
