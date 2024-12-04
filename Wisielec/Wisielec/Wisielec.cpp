@@ -137,6 +137,29 @@ int main()
     loadHighScores("scores.txt", highScores);
     playGame(words, highScores);
 
+    char choice;
+
+    do
+    {
+        cout << "1. Play" << endl;
+        cout << "2. Exit" << endl;
+        cin >> choice;
+
+        switch (choice)
+        {
+        case '1':
+            playGame(words, highScores);
+            break;
+        case '2':
+            cout << "Bye bye !" << endl;
+            break;
+        default:
+            cout << "Try again!" << endl;
+        }
+    } 
+    while (choice != '2');
+
+
     return 0;
 
 }
