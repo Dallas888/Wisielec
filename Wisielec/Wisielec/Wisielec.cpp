@@ -15,18 +15,18 @@ struct HighScore
 };
 
 
-//funkcja do wczytywania i zapisywania danych 
+//funkcja do wczytywania i zapisywania slow z pliku
 void loadWords(const string& filename, vector<string>& words)
 {
-    ifstream file(filename); //otwiera plik
+    ifstream file(filename);     //otwiera plik
 
     if (!file.is_open())
     {
-        cerr << "ERROR" << endl;
+        cout << "ERROR" << endl;
         return;
     }
 
-    string word; //zmienna przechowujaca slowa
+    string word;                //zmienna przechowujaca slowa
 
     while (file >> word)        // petla czyta slowa lnijka po linijce
     {
@@ -35,6 +35,26 @@ void loadWords(const string& filename, vector<string>& words)
 
     file.close();
 }
+
+//funkcja do zapisywania danych gracza do pliku
+void saveHighScores(const string& filename, vector<HighScore>& scores)
+{
+    ofstream file(filename);    //otwiera plik w trybie zapisu
+
+    if (!file.is_open())
+    {
+        cout << "ERROR" << endl;
+        return;
+    }
+
+    for (const auto& score : scores)
+    {
+        file << score.name << " " << score.score << endl;   //zapis danych do pliku
+    }
+
+    file.close();
+}
+
 
 
 //logika gry 
