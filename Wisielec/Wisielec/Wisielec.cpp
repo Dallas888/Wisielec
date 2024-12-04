@@ -3,10 +3,9 @@
 #include<fstream>
 #include<string>
 #include<algorithm>
+#include <filesystem>
 
 using namespace std;
-
-//zaraz sie zdenerwuje czemu nie zgrywa sie to z gitem xd
 
 //punktacja highscore
 struct HighScore
@@ -21,9 +20,9 @@ void loadWords(const string& filename, vector<string>& words)
 {
     ifstream file(filename); //otwiera plik
 
-    if (!file)
+    if (!file.is_open())
     {
-        cout << "cos sie zesralo" << endl;
+        cerr << "ERROR" << endl;
         return;
     }
 
@@ -34,6 +33,7 @@ void loadWords(const string& filename, vector<string>& words)
         words.push_back(word); //Dodaje slowo do wektora
     }
 
+    file.close();
 }
 
 
@@ -49,19 +49,19 @@ int main()
 {
     vector<string>words;
     loadWords("words.txt", words);
-
     if (words.empty())
     {
-        cout << "pustooo" << endl;
+        cout << "pusty" << endl;
     }
     else
     {
-        cout << "cos jest: " << endl;
         for (const auto& word : words)
         {
-            cout << word << endl;   //wyswietlanie kazdego wczytanego slowa z wektora
+            cout << word << endl;
         }
     }
+    
+    return 0;
 
 }
 
