@@ -6,6 +6,8 @@
 
 using namespace std;
 
+//zaraz sie zdenerwuje czemu nie zgrywa sie to z gitem xd
+
 //punktacja highscore
 struct HighScore
 {
@@ -15,9 +17,9 @@ struct HighScore
 
 
 //funkcja do wczytywania i zapisywania danych 
-void loadWords(const string& word, vector<string>& words)
+void loadWords(const string& filename, vector<string>& words)
 {
-    ifstream file(word); //otwiera plik
+    ifstream file(filename); //otwiera plik
 
     if (!file)
     {
