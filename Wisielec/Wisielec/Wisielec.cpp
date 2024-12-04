@@ -55,7 +55,26 @@ void saveHighScores(const string& filename, vector<HighScore>& scores)
     file.close();
 }
 
+//Funkcja do wczytywania wyniku 
+void loadHighScores(const string& filename, vector<HighScore>& scores)
+{
+    ifstream file(filename);     //otwiera plik
 
+    if (!file.is_open())
+    {
+        cout << "ERROR" << endl;
+        return;
+    }
+
+   HighScore HS;                //zmienna przechowujaca dane
+
+    while (file >> HS.name >> HS.score)       
+    {
+        scores.push_back(HS); //Dodaje wynik do wektora
+    }
+
+    file.close();
+}
 
 //logika gry 
 
