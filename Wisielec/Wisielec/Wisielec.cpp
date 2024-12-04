@@ -91,34 +91,41 @@ void displayHighScores(const vector<HighScore>& scores)
 //logika gry 
 void playGame(const vector<string>& words, vector<HighScore>& scores)
 {
+    int attempts = 5;   //liczba zyc
+
     //Wybieranie losowego slowa
     srand(static_cast<unsigned>(time(0)));
     string word = words[rand() % words.size()];
     string guesseWord(word.length(), '_');          //slowo z niewidocznymi literami
     string usedLetters;                             // uzyte litery
 
-    cout << "Zgadnij slowo:  " << guesseWord << endl;         //pokaz aktualny stan slowa
 
-    char guess;
-    cin >> guess;
-
-    if (usedLetters.find(guess) != -1)
+    while (attempts > 0 && guesseWord != word)
     {
-        cout << "Ta litera zostala juz uzyta." << endl;
-        //continue;
-    }
+        cout << "Zgadnij slowo:  " << guesseWord << endl;         //pokaz aktualny stan slowa
+        cout << "Zdrowie: " << attempts << endl;
 
-    usedLetters += guess;
+        char guess;
+        cin >> guess;
 
-    if (word.find(guess) != -1)                     //jesli litera jest w slowie 
-    {
-        for (size_t i = 0; i < word.length(); ++i)
+        if (usedLetters.find(guess) != -1)
         {
-            if (word[i] == guess)
-            {
-                guesseWord[i] = guess;              //ujawnia litere 
-           }
+            cout << "Ta litera zostala juz uzyta." << endl;
+            //continue;
+        }
 
+        usedLetters += guess;
+
+        if (word.find(guess) != -1)                     //jesli litera jest w slowie 
+        {
+            for (size_t i = 0; i < word.length(); ++i)
+            {
+                if (word[i] == guess)
+                {
+                    guesseWord[i] = guess;              //ujawnia litere 
+                }
+
+            }
         }
     }
 }
